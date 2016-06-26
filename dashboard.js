@@ -57,6 +57,9 @@ d3.json('data.json', function(error, data2009){
     createPieChart('hospital_county');
     createPieChart('year');
     createPieChart('discharge_day_of_week', dayOfWeekOrdering);
+    createPieChart('facility_name');
+    
+    
     
     //---------------------------------------------------------- length of stay
     var stayDim = ndx.dimension(dc.pluck('length_of_stay')); 
