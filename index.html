@@ -19,7 +19,8 @@
     <div class="dc-data-count dc-chart" id="data-count">
         <h1>Google Summer of Code 2016 | Open Health: SPARCS data visualization
             <div><small>
-            <span class="filter-count"></span> selected out of <span class="total-count"></span> records
+            <span class="filter-count"></span> selected out of <span class="total-count"></span> records |
+            <a id="resetAll" href="#">Reset all</a>
             </small></div>
         </h1>
         <div>    
@@ -39,10 +40,15 @@
             Actual datasets contain more than million records for each year, and are subject for further development. 
         </div>
     </div>
+    
+    <h4>Year<small><a id="resetYear">reset</a></small></h4>
     <div class="dc-chart" id="chart-ring-year"></div>
-    <div class="dc-chart" id="chart-ring-day"></div>
-    <div class="dc-chart" id="chart-stay-count"></div>
 
+    <h4>Weekday<small><a id="resetWeekday">reset</a></small></h4>
+    <div class="dc-chart" id="chart-ring-day"></div>
+
+    <h4>Length of stay<small><a id="resetStay">reset</a></small></h4>
+    <div class="dc-chart" id="chart-stay-count"></div>
 
  </body> 
 </html>

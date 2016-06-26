@@ -82,5 +82,25 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, da
         .dimension(ndx)
         .group(all);
 
+    d3.selectAll('a#resetAll').on('click', function () {
+        dc.filterAll();
+        dc.renderAll();
+    });
+
+    d3.selectAll('a#resetYear').on('click', function () {
+        yearChart.filterAll();
+        dc.redrawAll();
+    });
+
+    d3.selectAll('a#resetWeekday').on('click', function () {
+        dayChart.filterAll();
+        dc.redrawAll();
+    });
+
+    d3.selectAll('a#resetStay').on('click', function () {
+        stayChart.filterAll();
+        dc.redrawAll();
+    });
+
     dc.renderAll();
 })})})})})});
