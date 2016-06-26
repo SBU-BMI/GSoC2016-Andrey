@@ -1,21 +1,21 @@
 var data = [];
 
 // current workaround for multiple data loading 
-// d3.json('data.json', function(error, data2009){
-d3.json('https://health.data.ny.gov/resource/s8d9-z734.json', function(error, data2009){
-d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json', function(error, data2010){
-d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json', function(error, data2011){
-d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json', function(error, data2012){
-d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json', function(error, data2013){
-d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, data2014){
+d3.json('data.json', function(error, data2009){
+// d3.json('https://health.data.ny.gov/resource/s8d9-z734.json', function(error, data2009){
+// d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json', function(error, data2010){
+// d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json', function(error, data2011){
+// d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json', function(error, data2012){
+// d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json', function(error, data2013){
+// d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, data2014){
 
     // concatenate all data into one 
     data = data.concat(data2009);
-    data = data.concat(data2010);
-    data = data.concat(data2011);
-    data = data.concat(data2012);
-    data = data.concat(data2013);
-    data = data.concat(data2014);
+    // data = data.concat(data2010);
+    // data = data.concat(data2011);
+    // data = data.concat(data2012);
+    // data = data.concat(data2013);
+    // data = data.concat(data2014);
 
     // data cleanup 
     var yearFormat = d3.time.format('%Y');
@@ -44,6 +44,20 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, da
         .innerRadius(20);
     d3.selectAll('a#resetArea').on('click', function () {
         areaChart.filterAll();
+        dc.redrawAll();
+    });
+    //---------------------------------------------------------- Hospital County
+    var countyDim = ndx.dimension(function(d){return d.hospital_county ? d.hospital_county : "";});
+    var countPerCounty = countyDim.group().reduceCount();
+    var countyChart = dc.pieChart('#chart-ring-county');   
+    countyChart
+        .width(150)
+        .height(150)
+        .dimension(countyDim)
+        .group(countPerCounty)
+        .innerRadius(20);
+    d3.selectAll('a#resetCounty').on('click', function () {
+        countyChart.filterAll();
         dc.redrawAll();
     });
     //---------------------------------------------------------- years
@@ -117,5 +131,5 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, da
     // render all the things!
     dc.renderAll();
 })
-})})})})})
+// })})})})})
 ;
