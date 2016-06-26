@@ -1,6 +1,7 @@
 var data = [];
 
 // current workaround for multiple data loading 
+// d3.json('data.json', function(error, data2009){
 d3.json('https://health.data.ny.gov/resource/s8d9-z734.json', function(error, data2009){
 d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json', function(error, data2010){
 d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json', function(error, data2011){
@@ -31,6 +32,20 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, da
     // Below follows lot of controls.
     // Each code block creates: dimension, measures (counts per dimensions), chart init and configuration, reset button
 
+    //---------------------------------------------------------- Health Service Area
+    var areaDim = ndx.dimension(function(d){return d.hospital_service_area ? d.hospital_service_area : "";});
+    var countPerArea = areaDim.group().reduceCount();
+    var areaChart = dc.pieChart('#chart-ring-area');   
+    areaChart
+        .width(150)
+        .height(150)
+        .dimension(areaDim)
+        .group(countPerArea)
+        .innerRadius(20);
+    d3.selectAll('a#resetArea').on('click', function () {
+        areaChart.filterAll();
+        dc.redrawAll();
+    });
     //---------------------------------------------------------- years
     var yearDim = ndx.dimension(dc.pluck('year'));
     var countPerYear = yearDim.group().reduceCount();
@@ -101,4 +116,6 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, da
     });
     // render all the things!
     dc.renderAll();
-})})})})})});
+})
+})})})})})
+;
