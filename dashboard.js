@@ -31,76 +31,37 @@ d3.json('data.json', function(error, data2009){
 
     // Below follows lot of controls.
     // Each code block creates: dimension, measures (counts per dimensions), chart init and configuration, reset button
+    var createPieChart = function(name, orderingFunction){
+        var dimension = ndx.dimension(function(d){return d[name] ? d[name] : "";});
+        var counts = dimension.group().reduceCount();
+        var chart = dc.pieChart('#' + name);   
+        chart.width(150)
+            .height(150)
+            .dimension(dimension)
+            .group(counts)
+            .innerRadius(20);
+        if (orderingFunction){
+            chart.ordering(orderingFunction);
+        }
+        d3.selectAll('a#reset_' + name).on('click', function () {
+            chart.filterAll();
+            dc.redrawAll();
+        });
+    };
 
-    //---------------------------------------------------------- Health Service Area
-    var areaDim = ndx.dimension(function(d){return d.hospital_service_area ? d.hospital_service_area : "";});
-    var countPerArea = areaDim.group().reduceCount();
-    var areaChart = dc.pieChart('#chart-ring-area');   
-    areaChart
-        .width(150)
-        .height(150)
-        .dimension(areaDim)
-        .group(countPerArea)
-        .innerRadius(20);
-    d3.selectAll('a#resetArea').on('click', function () {
-        areaChart.filterAll();
-        dc.redrawAll();
-    });
-    //---------------------------------------------------------- Hospital County
-    var countyDim = ndx.dimension(function(d){return d.hospital_county ? d.hospital_county : "";});
-    var countPerCounty = countyDim.group().reduceCount();
-    var countyChart = dc.pieChart('#chart-ring-county');   
-    countyChart
-        .width(150)
-        .height(150)
-        .dimension(countyDim)
-        .group(countPerCounty)
-        .innerRadius(20);
-    d3.selectAll('a#resetCounty').on('click', function () {
-        countyChart.filterAll();
-        dc.redrawAll();
-    });
-    //---------------------------------------------------------- years
-    var yearDim = ndx.dimension(dc.pluck('year'));
-    var countPerYear = yearDim.group().reduceCount();
-    var yearChart = dc.pieChart('#chart-ring-year');   
-    yearChart
-        .width(150)
-        .height(150)
-        .dimension(yearDim)
-        .group(countPerYear)
-        .innerRadius(20);
-    d3.selectAll('a#resetYear').on('click', function () {
-        yearChart.filterAll();
-        dc.redrawAll();
-    });
-    //---------------------------------------------------------- day of week
-    var dayDim = ndx.dimension(dc.pluck('discharge_day_of_week'));
-    var countPerDay = dayDim.group().reduceCount();
-    var dayChart = dc.pieChart('#chart-ring-day');  
-    dayChart
-        .width(150)
-        .height(150)
-        .dimension(dayDim)
-        .group(countPerDay)
-        .innerRadius(20)
-        .ordering(function (d) {
-            var order = {
-                'MON': 0, 'TUE': 1, 'WED': 2, 'THU': 3,
-                'FRI': 4, 'SAT': 5, 'SUN': 6
-            }
-            return order[d.key];
-            }
-        );
-    d3.selectAll('a#resetWeekday').on('click', function () {
-        dayChart.filterAll();
-        dc.redrawAll();
-    });
+    var dayOfWeekOrdering = function (d) {
+        return {'MON': 0, 'TUE': 1, 'WED': 2, 'THU': 3, 'FRI': 4, 'SAT': 5, 'SUN': 6}[d.key];
+    };
+
+    createPieChart('hospital_service_area');
+    createPieChart('hospital_county');
+    createPieChart('year');
+    createPieChart('discharge_day_of_week', dayOfWeekOrdering);
+    
     //---------------------------------------------------------- length of stay
     var stayDim = ndx.dimension(dc.pluck('length_of_stay')); 
     var countPerStay = stayDim.group().reduceCount();
-    var stayChart = dc.barChart('#chart-stay-count'),
-        dataCount = dc.dataCount('#data-count');   
+    var stayChart = dc.barChart('#chart-stay-count');
     stayChart
         .width(300)
         .height(180)
@@ -110,7 +71,7 @@ d3.json('data.json', function(error, data2009){
         .elasticY(true)
         .centerBar(true)
         .barPadding(5)
-        .xAxisLabel('Days of stay')
+        .xAxisLabel('Value')
         .yAxisLabel('Count')
         .margins({top: 10, right: 20, bottom: 50, left: 50});
     stayChart.xAxis().tickValues([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
@@ -120,6 +81,7 @@ d3.json('data.json', function(error, data2009){
     });
     // count widget (count all records and selected)
     var all = ndx.groupAll();
+    var dataCount = dc.dataCount('#data-count');   
     dataCount
         .dimension(ndx)
         .group(all);
