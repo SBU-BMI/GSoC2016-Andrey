@@ -67,5 +67,9 @@ d3.json('https://health.data.ny.gov/resource/s8d9-z734.json', function(error, da
 
     stayChart.xAxis().tickValues([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
+    dataCount
+        .dimension(ndx)
+        .group(all);
+
     dc.renderAll();
 });
