@@ -1,72 +1,22 @@
 <html>
  <head>
-  <meta charset="utf-8">
-  <script src="javascripts/underscore-min.js"></script>
-  <script src="javascripts/leaflet.js"></script>
-  <script src="javascripts/d3.js"></script>
-  <script src="javascripts/crossfilter.js"></script>
-  <script src="javascripts/dc.js"></script>
+    <meta charset="utf-8">
+    <title>Hospital dashboard</title>
+    <link rel="stylesheet" type="text/css" href="css/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/dc.css">
 
-  <script type="text/javascript">
-
-    // facts
-    var livingThings = crossfilter([
-    { name: 'Rusty',  type: 'human', legs: 2 },
-    { name: 'Alex',   type: 'human', legs: 2 },
-    { name: 'Lassie', type: 'dog',   legs: 4 },
-    { name: 'Spot',   type: 'dog',   legs: 4 },
-    { name: 'Polly',  type: 'bird',  legs: 2 },
-    { name: 'Fiona',  type: 'plant', legs: 0 }
-    ]);
-
-    // counting
-    var n = livingThings.groupAll().reduceCount().value();
-    console.log("there are " + n + " living things in my house");
-
-    // grouping
-    var legs = livingThings.groupAll().reduceSum(function(fact){
-        return fact.legs;
-    }).value();    
-    console.log("there are " + legs + " legs in my house");
-
-    // filtering per type, and type == 'dog'
-    var typeDimension = livingThings.dimension(function(d){
-        return d.type;
-    });
-    // NB! This thing is stateful! Keeps livingThings showing 'dogs' only 
-    typeDimension.filter("dog");
-
-    var dogsCount = livingThings.groupAll().reduceCount().value();
-    console.log("there are " + dogsCount + " dogs in my house");
-    
-    var dogsLegs = livingThings.groupAll().reduceSum(function(fact){
-        return fact.legs;
-    }).value();    
-    console.log("there are " + dogsLegs + " dogs legs in my house");
-
-    //reset
-    //typeDimension.filterAll();
-
-    // grouping
-    var countMeasure = typeDimension.group().reduceCount();
-    var takeTop = 4;
-    var topFacts = countMeasure.top(4);
-    for (var i = 0; i < takeTop; i++){
-        console.log("There are " + topFacts[i].value + " " + topFacts[i].key + "s in my house");
-    }
-
-    var legMeasure = typeDimension.group().reduceSum(function(fact){return fact.legs;});
-    var topLegs = legMeasure.top(takeTop);
-    for (var i = 0; i < takeTop; i++){
-        console.log("There are " + topLegs[i].value + " " + topLegs[i].key + " legs in my house");
-    }
-    
-  </script>
-
+    <script src="javascripts/underscore-min.js"></script>
+    <script src="javascripts/leaflet.js"></script>
+    <script src="javascripts/d3.js"></script>
+    <script src="javascripts/crossfilter.js"></script>
+    <script src="javascripts/dc.js"></script>
+    <script src="javascripts/dashboard.js"></script>
  </head> 
  <body>
-  <header>
-    <h1>Open Health web app, GSoC 2016 project - Hospital data dashboard</h1>
-  </header>
+    <header>
+        <h1>Open Health web app, GSoC 2016 project - Hospital data dashboard</h1>
+    </header>
+    <div class="dc-chart" id="chart-ring-year"></div>
  </body> 
 </html>
