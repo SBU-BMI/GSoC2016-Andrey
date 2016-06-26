@@ -11,7 +11,9 @@
     <script src="javascripts/d3.js"></script>
     <script src="javascripts/crossfilter.js"></script>
     <script src="javascripts/dc.js"></script>
+    <script src="javascripts/jquery-3.0.0.min.js"></script>
     <script src="javascripts/dashboard.js"></script>
+    
  </head> 
  <body>
     <div class="dc-data-count dc-chart" id="data-count">
@@ -20,26 +22,23 @@
             <span class="filter-count"></span> selected out of <span class="total-count"></span> records
             </small></div>
         </h1>
+        <div>    
+            <a href="http://www.health.ny.gov/statistics/sparcs/">
+            Statewide Planning and Research Cooperative System (SPARCS)</a>
+            is system collecting patient level data from hospitals. 
+            Visualization presents inpatient deidentified dataset of discharge level detail on patient characteristics, diagnoses, treatments, services and charges.
+            Does not contain protected health information.
+            Data sources: 
+                <a href="https://health.data.ny.gov/Health/Hospital-Inpatient-Discharges-SPARCS-De-Identified/q6hk-esrj">2009</a>, 
+                <a href="https://health.data.ny.gov/Health/Hospital-Inpatient-Discharges-SPARCS-De-Identified/mtfm-rxf4">2010</a>, 
+                <a href="https://health.data.ny.gov/Health/Hospital-Inpatient-Discharges-SPARCS-De-Identified/pyhr-5eas">2011</a>, 
+                <a href="https://health.data.ny.gov/Health/Hospital-Inpatient-Discharges-SPARCS-De-Identified/u4ud-w55t">2012</a>, 
+                <a href="https://health.data.ny.gov/Health/Hospital-Inpatient-Discharges-SPARCS-De-Identified/npsr-cm47">2013</a>, 
+                <a href="https://health.data.ny.gov/Health/Hospital-Inpatient-Discharges-SPARCS-De-Identified/rmwa-zns4">2014</a>.  
+            Currently presented data sources contains contains sample data of 1000 records.
+            Actual datasets contain more than million records for each year, and are subject for further development. 
+        </div>
     </div>
-    <br>
-    <div>    
-        <a href="http://www.health.ny.gov/statistics/sparcs/">
-        Statewide Planning and Research Cooperative System (SPARCS)</a>
-        is system collecting patient level data from hospitals. 
-        Visualization presents inpatient deidentified dataset of discharge level detail on patient characteristics, diagnoses, treatments, services and charges.
-        Does not contain protected health information.
-        Data sources: 
-            <a href="https://health.data.ny.gov/Health/Hospital-Inpatient-Discharges-SPARCS-De-Identified/q6hk-esrj">2009</a> (implemented), 
-            <a href="https://health.data.ny.gov/Health/Hospital-Inpatient-Discharges-SPARCS-De-Identified/mtfm-rxf4">2010</a> (this and following in progress), 
-            <a href="https://health.data.ny.gov/Health/Hospital-Inpatient-Discharges-SPARCS-De-Identified/pyhr-5eas">2011</a>, 
-            <a href="https://health.data.ny.gov/Health/Hospital-Inpatient-Discharges-SPARCS-De-Identified/u4ud-w55t">2012</a>, 
-            <a href="https://health.data.ny.gov/Health/Hospital-Inpatient-Discharges-SPARCS-De-Identified/npsr-cm47">2013</a>, 
-            <a href="https://health.data.ny.gov/Health/Hospital-Inpatient-Discharges-SPARCS-De-Identified/rmwa-zns4">2014</a>.  
-        Currently presented data sources contains contains sample data of 1000 records.
-        Actual datasets contain more than million records for each year, and are subject for further development. 
-    </div>
-
-
     <div class="dc-chart" id="chart-ring-year"></div>
     <div class="dc-chart" id="chart-ring-day"></div>
     <div class="dc-chart" id="chart-stay-count"></div>

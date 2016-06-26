@@ -1,10 +1,21 @@
-var data2009 = 
+var data = [];
 
-// todo: load multiple years
-d3.json('https://health.data.ny.gov/resource/s8d9-z734.json', function(error, data){
- 
+d3.json('https://health.data.ny.gov/resource/s8d9-z734.json', function(error, data2009){
+d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json', function(error, data2010){
+d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json', function(error, data2011){
+d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json', function(error, data2012){
+d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json', function(error, data2013){
+d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, data2014){
+
+    data = data.concat(data2009);
+    data = data.concat(data2010);
+    data = data.concat(data2011);
+    data = data.concat(data2012);
+    data = data.concat(data2013);
+    data = data.concat(data2014);
+
     var yearFormat = d3.time.format('%Y'),
-    	dayOfWeekFormat = d3.time.format('%a');
+        dayOfWeekFormat = d3.time.format('%a');
 
 
     _.each(data, function(d) {
@@ -22,12 +33,12 @@ d3.json('https://health.data.ny.gov/resource/s8d9-z734.json', function(error, da
     var all = ndx.groupAll();
 
     var countPerYear = yearDim.group().reduceCount(),
-    	countPerDay = dayDim.group().reduceCount(),
-    	countPerStay = stayDim.group().reduceCount();
+        countPerDay = dayDim.group().reduceCount(),
+        countPerStay = stayDim.group().reduceCount();
 
     var yearChart = dc.pieChart('#chart-ring-year'),   
-    	dayChart = dc.pieChart('#chart-ring-day'),   
-    	stayChart = dc.barChart('#chart-stay-count'),
+        dayChart = dc.pieChart('#chart-ring-day'),   
+        stayChart = dc.barChart('#chart-stay-count'),
         dataCount = dc.dataCount('#data-count');   
     
     yearChart
@@ -72,4 +83,4 @@ d3.json('https://health.data.ny.gov/resource/s8d9-z734.json', function(error, da
         .group(all);
 
     dc.renderAll();
-});
+})})})})})});
