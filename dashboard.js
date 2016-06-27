@@ -1,7 +1,6 @@
 var data = [];
 
 // current workaround for multiple data loading 
-// d3.json('data.json', function(error, data2009){
 d3.json('https://health.data.ny.gov/resource/s8d9-z734.json', function(error, data2009){
 d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json', function(error, data2010){
 d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json', function(error, data2011){
@@ -58,7 +57,24 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, da
     createPieChart('year');
     createPieChart('discharge_day_of_week', dayOfWeekOrdering);
     createPieChart('facility_name');
+    createPieChart('gender');
+    createPieChart('race');
+    createPieChart('ethnicity');
+    createPieChart('type_of_admission');
+    createPieChart('patient_disposition');
+    createPieChart('ccs_diagnosis_description');
+    createPieChart('ccs_procedure_description');
+    createPieChart('apr_drg_description');
+    createPieChart('apr_mdc_description');
+    createPieChart('apr_severity_of_illness_description');
+    createPieChart('apr_risk_of_mortality');
+    createPieChart('apr_medical_surgical_description');
+    createPieChart('emergency_department_indicator');
+
     
+    
+        
+
     
     
     //---------------------------------------------------------- length of stay
@@ -95,6 +111,4 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, da
     });
     // render all the things!
     dc.renderAll();
-})
-})})})})})
-;
+})})})})})});
