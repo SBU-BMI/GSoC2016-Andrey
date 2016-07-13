@@ -70,6 +70,8 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, da
     createPieChart('apr_risk_of_mortality');
     createPieChart('apr_medical_surgical_description');
     createPieChart('emergency_department_indicator');
+    createPieChart('age_group');
+    
 
     
     
