@@ -71,6 +71,9 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, da
     createPieChart('apr_medical_surgical_description');
     createPieChart('emergency_department_indicator');
     createPieChart('age_group');
+    createPieChart('source_of_payment_1');
+    createPieChart('source_of_payment_2');
+    createPieChart('source_of_payment_3');
     
 
     
