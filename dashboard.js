@@ -28,8 +28,7 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, da
     // main magic!
     var ndx = crossfilter(data);
 
-    // Below follows lot of controls.
-    // Each code block creates: dimension, measures (counts per dimensions), chart init and configuration, reset button
+    // creates dimension, measures (counts per dimensions), chart init and configuration, reset button
     var createPieChart = function(name, orderingFunction){
         var dimension = ndx.dimension(function(d){return d[name] ? d[name] : "";});
         var counts = dimension.group().reduceCount();
@@ -75,14 +74,7 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, da
     createPieChart('source_of_payment_2');
     createPieChart('source_of_payment_3');
     
-
-    
-    
-        
-
-    
-    
-    //---------------------------------------------------------- length of stay
+    // length of stay
     var stayDim = ndx.dimension(dc.pluck('length_of_stay')); 
     var countPerStay = stayDim.group().reduceCount();
     var stayChart = dc.barChart('#chart-stay-count');
@@ -103,17 +95,20 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, da
         stayChart.filterAll();
         dc.redrawAll();
     });
+
     // count widget (count all records and selected)
     var all = ndx.groupAll();
     var dataCount = dc.dataCount('#data-count');   
     dataCount
         .dimension(ndx)
         .group(all);
-    // reset all selections
+    
+    // button 'Reset all'
     d3.selectAll('a#resetAll').on('click', function () {
         dc.filterAll();
         dc.renderAll();
     });
+
     // render all the things!
     dc.renderAll();
 })})})})})});
