@@ -55,7 +55,7 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, da
     createPieChart('hospital_service_area');
     createPieChart('hospital_county');
     createPieChart('year');
-    createPieChart('discharge_day_of_week', dayOfWeekOrdering);
+    createPieChart('admit_day_of_week', dayOfWeekOrdering);
     createPieChart('facility_name');
     createPieChart('gender');
     createPieChart('race');
