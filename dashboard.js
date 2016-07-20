@@ -111,4 +111,20 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, da
 
     // render all the things!
     dc.renderAll();
+
+    sparcsDc = {};
+
+    sparcsDc.helloFromDc = function(){
+        console.log('hello from SPARCS :)');
+        return false;
+    }
+
+    sparcsDc.getTop = function(fieldName, topCount){
+        var dimension = ndx.dimension(function(d){return d[fieldName] ? d[fieldName] : "";});
+        var counts = dimension.group().reduceCount();
+        
+        console.log(counts.top(topCount));       
+    }
+
+
 })})})})})});
