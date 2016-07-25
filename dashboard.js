@@ -1,12 +1,12 @@
 var data = [];
 
 // current workaround for multiple data loading 
-d3.json('https://health.data.ny.gov/resource/s8d9-z734.json', function(error, data2009){
-d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json', function(error, data2010){
-d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json', function(error, data2011){
-d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json', function(error, data2012){
-d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json', function(error, data2013){
-d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json', function(error, data2014){
+d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$limit=1000', function(error, data2009){
+d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json?$limit=1000', function(error, data2010){
+d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json?$limit=1000', function(error, data2011){
+d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json?$limit=1000', function(error, data2012){
+d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json?$limit=1000', function(error, data2013){
+d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000', function(error, data2014){
 
     // concatenate all data into one 
     data = data.concat(data2009);
