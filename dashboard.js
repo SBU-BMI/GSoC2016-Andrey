@@ -1,6 +1,10 @@
 var data = [];
 
 // current workaround for multiple data loading 
+
+// for offline testing purposes
+// d3.json('data.json', function(error, data){
+
 d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$limit=1000', function(error, data2009){
 d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json?$limit=1000', function(error, data2010){
 d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json?$limit=1000', function(error, data2011){
@@ -23,6 +27,9 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000', functi
         d.year = yearFormat(new Date(d.discharge_year));
         d.day = dayOfWeekFormat(new Date(d.discharge_day_of_week));
         d.length_of_stay = +d.length_of_stay;
+        if (d.age_group){
+            d.age_group_start = +d.age_group.substring(0,2);
+        }
     });
 
     // main magic!
@@ -95,6 +102,28 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000', functi
         stayChart.filterAll();
         dc.redrawAll();
     });
+    
+    // age groups
+    var ageDim = ndx.dimension(dc.pluck('age_group_start')); 
+    var countPerAge = ageDim.group().reduceCount();
+    var ageChart = dc.barChart('#chart-agegroup');
+    ageChart
+        .width(300)
+        .height(180)
+        .dimension(ageDim)
+        .group(countPerAge)
+        .x(d3.scale.linear().domain([-10,80]))
+        .elasticY(true)
+        .centerBar(true)
+        .barPadding(5)
+        .xAxisLabel('Age group')
+        .yAxisLabel('Count')
+        .margins({top: 10, right: 20, bottom: 50, left: 50});
+    ageChart.xAxis().tickValues([0, 18, 30, 50, 70]);
+    d3.selectAll('a#resetAgeGroup').on('click', function () {
+        ageChart.filterAll();
+        dc.redrawAll();
+    });
 
     // count widget (count all records and selected)
     var all = ndx.groupAll();
@@ -127,4 +156,5 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000', functi
     }
 
 
-})})})})})});
+})})})})})
+});
