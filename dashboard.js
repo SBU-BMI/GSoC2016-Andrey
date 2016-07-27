@@ -119,8 +119,6 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000', functi
         .yAxisLabel('Count')
         .margins({top: 10, right: 20, bottom: 50, left: 50});
     stayChart.xAxis().tickValues([2008, 2009, 2010, 2011, 2012, 2013, 2014]);
-    // todo: rotate labels
-    // stayChart.xAxis().tickValues([2008, 2009, 2010, 2011, 2012, 2013, 2014]);
     d3.selectAll('a#resetYear').on('click', function () {
         yearChart.filterAll();
         dc.redrawAll();
