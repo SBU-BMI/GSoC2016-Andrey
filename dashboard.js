@@ -3,29 +3,28 @@ var data = [];
 // current workaround for multiple data loading 
 
 // for offline testing purposes
-d3.json('data.json', function(error, data){
+// d3.json('data.json', function(error, data){
 
-// d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$limit=1000', function(error, data2009){
-// d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json?$limit=1000', function(error, data2010){
-// d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json?$limit=1000', function(error, data2011){
-// d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json?$limit=1000', function(error, data2012){
-// d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json?$limit=1000', function(error, data2013){
-// d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000', function(error, data2014){
+d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$limit=1000', function(error, data2009){
+d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json?$limit=1000', function(error, data2010){
+d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json?$limit=1000', function(error, data2011){
+d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json?$limit=1000', function(error, data2012){
+d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json?$limit=1000', function(error, data2013){
+d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000', function(error, data2014){
 
-//     // concatenate all data into one 
-//     data = data.concat(data2009);
-//     data = data.concat(data2010);
-//     data = data.concat(data2011);
-//     data = data.concat(data2012);
-//     data = data.concat(data2013);
-//     data = data.concat(data2014);
+    // concatenate all data into one 
+    data = data.concat(data2009);
+    data = data.concat(data2010);
+    data = data.concat(data2011);
+    data = data.concat(data2012);
+    data = data.concat(data2013);
+    data = data.concat(data2014);
 
     // data cleanup 
     var yearFormat = d3.time.format('%Y');
     var dayOfWeekFormat = d3.time.format('%a');
     _.each(data, function(d) {
         d.year = yearFormat(new Date(d.discharge_year));
-        d.day = dayOfWeekFormat(new Date(d.discharge_day_of_week));
         d.length_of_stay = +d.length_of_stay;
         if (d.age_group){
             d.age_group_start = +d.age_group.substring(0,2);
@@ -103,6 +102,30 @@ d3.json('data.json', function(error, data){
         dc.redrawAll();
     });
     
+    // years
+    var yearDim = ndx.dimension(dc.pluck('year')); 
+    var countPerYear = yearDim.group().reduceCount();
+    var yearChart = dc.barChart('#chart-year');
+    yearChart
+        .width(300)
+        .height(180)
+        .dimension(yearDim)
+        .group(countPerYear)
+        .x(d3.scale.linear().domain([2007,2015]))
+        .elasticY(true)
+        .centerBar(true)
+        .barPadding(3)
+        .xAxisLabel('Year')
+        .yAxisLabel('Count')
+        .margins({top: 10, right: 20, bottom: 50, left: 50});
+    stayChart.xAxis().tickValues([2008, 2009, 2010, 2011, 2012, 2013, 2014]);
+    // todo: rotate labels
+    // stayChart.xAxis().tickValues([2008, 2009, 2010, 2011, 2012, 2013, 2014]);
+    d3.selectAll('a#resetYear').on('click', function () {
+        yearChart.filterAll();
+        dc.redrawAll();
+    });
+
     // age groups
     var ageDim = ndx.dimension(dc.pluck('age_group_start')); 
     var countPerAge = ageDim.group().reduceCount();
@@ -179,5 +202,5 @@ d3.json('data.json', function(error, data){
     }
 
 
-// })})})})})
+})})})})})
 });
