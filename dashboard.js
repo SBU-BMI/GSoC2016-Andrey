@@ -3,22 +3,22 @@ var data = [];
 // current workaround for multiple data loading 
 
 // for offline testing purposes
-// d3.json('data.json', function(error, data){
+d3.json('data.json', function(error, data){
 
-d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$limit=1000', function(error, data2009){
-d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json?$limit=1000', function(error, data2010){
-d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json?$limit=1000', function(error, data2011){
-d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json?$limit=1000', function(error, data2012){
-d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json?$limit=1000', function(error, data2013){
-d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000', function(error, data2014){
+// d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$limit=1000', function(error, data2009){
+// d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json?$limit=1000', function(error, data2010){
+// d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json?$limit=1000', function(error, data2011){
+// d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json?$limit=1000', function(error, data2012){
+// d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json?$limit=1000', function(error, data2013){
+// d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000', function(error, data2014){
 
-    // concatenate all data into one 
-    data = data.concat(data2009);
-    data = data.concat(data2010);
-    data = data.concat(data2011);
-    data = data.concat(data2012);
-    data = data.concat(data2013);
-    data = data.concat(data2014);
+//     // concatenate all data into one 
+//     data = data.concat(data2009);
+//     data = data.concat(data2010);
+//     data = data.concat(data2011);
+//     data = data.concat(data2012);
+//     data = data.concat(data2013);
+//     data = data.concat(data2014);
 
     // data cleanup 
     var yearFormat = d3.time.format('%Y');
@@ -125,6 +125,29 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000', functi
         dc.redrawAll();
     });
 
+    // day of week
+    var dayDim = ndx.dimension(dc.pluck('admit_day_of_week')); 
+    var countPerDay = dayDim.group().reduceCount();
+    var dayChart = dc.barChart('#chart-day');
+    dayChart
+        .width(300)
+        .height(180)
+        .dimension(dayDim)
+        .group(countPerDay)
+        .x(d3.scale.ordinal().domain(['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']))
+        .xUnits(dc.units.ordinal) // Tell dc.js that we're using an ordinal x-axis
+        .elasticY(true)
+        .centerBar(true)
+        .barPadding(1)
+        .xAxisLabel('Day of week')
+        .yAxisLabel('Count')
+        .margins({top: 10, right: 20, bottom: 50, left: 50});
+    // dayChart.xAxis().tickValues(['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']);
+    d3.selectAll('a#resetDay').on('click', function () {
+        dayChart.filterAll();
+        dc.redrawAll();
+    });
+
     // count widget (count all records and selected)
     var all = ndx.groupAll();
     var dataCount = dc.dataCount('#data-count');   
@@ -156,5 +179,5 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000', functi
     }
 
 
-})})})})})
+// })})})})})
 });
