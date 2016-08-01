@@ -1,16 +1,27 @@
 var data = [];
 
-// current workaround for multiple data loading 
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+
+var randomOffset = getRandomInt(0, 10000);
+
+// todo: use count
+// var count = 'https://health.data.ny.gov/resource/s8d9-z734.json?$select=count(*)';
+// [{"count":"2665414"}]
+// alert(count);
 
 // for offline testing purposes
 // d3.json('data.json', function(error, data){
 
-d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$limit=1000', function(error, data2009){
-d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json?$limit=1000', function(error, data2010){
-d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json?$limit=1000', function(error, data2011){
-d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json?$limit=1000', function(error, data2012){
-d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json?$limit=1000', function(error, data2013){
-d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000', function(error, data2014){
+// d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$limit=1000&$offset=' + randomOffset, function(error, data2009){
+d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$limit=1000&$offset=' + randomOffset, function(error, data2009){
+d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json?$limit=1000&$offset=' + randomOffset, function(error, data2010){
+d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json?$limit=1000&$offset=' + randomOffset, function(error, data2011){
+d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json?$limit=1000&$offset=' + randomOffset, function(error, data2012){
+d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json?$limit=1000&$offset=' + randomOffset, function(error, data2013){
+d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000&$offset=' + randomOffset, function(error, data2014){
 
     // concatenate all data into one 
     data = data.concat(data2009);
