@@ -1,4 +1,5 @@
 var data = [];
+const LIMIT = 10; 
 
 function getRandom(max) {
   return Math.floor(Math.random() * max);
@@ -21,12 +22,12 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$select=count(*)', f
 // for offline testing purposes
 // d3.json('data.json', function(error, data){
 
-d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$limit=1000&$offset=' + randomOffsets[2009], function(error, data2009){
-d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json?$limit=1000&$offset=' + randomOffsets[2010], function(error, data2010){
-d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json?$limit=1000&$offset=' + randomOffsets[2011], function(error, data2011){
-d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json?$limit=1000&$offset=' + randomOffsets[2012], function(error, data2012){
-d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json?$limit=1000&$offset=' + randomOffsets[2013], function(error, data2013){
-d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000&$offset=' + randomOffsets[2014], function(error, data2014){
+d3.json(`https://health.data.ny.gov/resource/s8d9-z734.json?$limit=${LIMIT}&$offset=` + randomOffsets[2009], function(error, data2009){
+d3.json(`https://health.data.ny.gov/resource/dpew-wqcg.json?$limit=${LIMIT}&$offset=` + randomOffsets[2010], function(error, data2010){
+d3.json(`https://health.data.ny.gov/resource/n5y9-zanf.json?$limit=${LIMIT}&$offset=` + randomOffsets[2011], function(error, data2011){
+d3.json(`https://health.data.ny.gov/resource/rv8x-4fm3.json?$limit=${LIMIT}&$offset=` + randomOffsets[2012], function(error, data2012){
+d3.json(`https://health.data.ny.gov/resource/tdf6-7fpk.json?$limit=${LIMIT}&$offset=` + randomOffsets[2013], function(error, data2013){
+d3.json(`https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=${LIMIT}&$offset=` + randomOffsets[2014], function(error, data2014){
 
     // concatenate all data into one 
     data = data.concat(data2009);
