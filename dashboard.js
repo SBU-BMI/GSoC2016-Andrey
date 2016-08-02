@@ -1,33 +1,42 @@
 var data = [];
-const LIMIT = 10; 
+const LIMIT = 10;
+
+const DATASETNAMES = {
+    2009: 's8d9-z734',
+    2010: 'dpew-wqcg',
+    2011: 'n5y9-zanf',
+    2012: 'rv8x-4fm3',
+    2013: 'tdf6-7fpk',
+    2014: 'pzzw-8zdv'
+} 
 
 function getRandom(max) {
   return Math.floor(Math.random() * max);
 }
 var randomOffsets = {};
 
-d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$select=count(*)', function(err, counted2009){
+d3.json(`https://health.data.ny.gov/resource/${DATASETNAMES[2009]}.json?$select=count(*)`, function(err, counted2009){
     randomOffsets[2009] = getRandom(counted2009[0].count);
-d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json?$select=count(*)', function(err, counted2010){
+d3.json(`https://health.data.ny.gov/resource/${DATASETNAMES[2010]}.json?$select=count(*)`, function(err, counted2010){
     randomOffsets[2010] = getRandom(counted2010[0].count);
-d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json?$select=count(*)', function(err, counted2011){
+d3.json(`https://health.data.ny.gov/resource/${DATASETNAMES[2011]}.json?$select=count(*)`, function(err, counted2011){
     randomOffsets[2011] = getRandom(counted2011[0].count);
-d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json?$select=count(*)', function(err, counted2012){
+d3.json(`https://health.data.ny.gov/resource/${DATASETNAMES[2012]}.json?$select=count(*)`, function(err, counted2012){
     randomOffsets[2012] = getRandom(counted2012[0].count);
-d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json?$select=count(*)', function(err, counted2013){
+d3.json(`https://health.data.ny.gov/resource/${DATASETNAMES[2013]}.json?$select=count(*)`, function(err, counted2013){
     randomOffsets[2013] = getRandom(counted2013[0].count);
-d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$select=count(*)', function(err, counted2014){
+d3.json(`https://health.data.ny.gov/resource/${DATASETNAMES[2014]}.json?$select=count(*)`, function(err, counted2014){
     randomOffsets[2014] = getRandom(counted2014[0].count);
 
 // for offline testing purposes
 // d3.json('data.json', function(error, data){
 
-d3.json(`https://health.data.ny.gov/resource/s8d9-z734.json?$limit=${LIMIT}&$offset=` + randomOffsets[2009], function(error, data2009){
-d3.json(`https://health.data.ny.gov/resource/dpew-wqcg.json?$limit=${LIMIT}&$offset=` + randomOffsets[2010], function(error, data2010){
-d3.json(`https://health.data.ny.gov/resource/n5y9-zanf.json?$limit=${LIMIT}&$offset=` + randomOffsets[2011], function(error, data2011){
-d3.json(`https://health.data.ny.gov/resource/rv8x-4fm3.json?$limit=${LIMIT}&$offset=` + randomOffsets[2012], function(error, data2012){
-d3.json(`https://health.data.ny.gov/resource/tdf6-7fpk.json?$limit=${LIMIT}&$offset=` + randomOffsets[2013], function(error, data2013){
-d3.json(`https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=${LIMIT}&$offset=` + randomOffsets[2014], function(error, data2014){
+d3.json(`https://health.data.ny.gov/resource/${DATASETNAMES[2009]}.json?$limit=${LIMIT}&$offset=` + randomOffsets[2009], function(error, data2009){
+d3.json(`https://health.data.ny.gov/resource/${DATASETNAMES[2010]}.json?$limit=${LIMIT}&$offset=` + randomOffsets[2010], function(error, data2010){
+d3.json(`https://health.data.ny.gov/resource/${DATASETNAMES[2011]}.json?$limit=${LIMIT}&$offset=` + randomOffsets[2011], function(error, data2011){
+d3.json(`https://health.data.ny.gov/resource/${DATASETNAMES[2012]}.json?$limit=${LIMIT}&$offset=` + randomOffsets[2012], function(error, data2012){
+d3.json(`https://health.data.ny.gov/resource/${DATASETNAMES[2013]}.json?$limit=${LIMIT}&$offset=` + randomOffsets[2013], function(error, data2013){
+d3.json(`https://health.data.ny.gov/resource/${DATASETNAMES[2014]}.json?$limit=${LIMIT}&$offset=` + randomOffsets[2014], function(error, data2014){
 
     // concatenate all data into one 
     data = data.concat(data2009);
