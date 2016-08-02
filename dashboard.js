@@ -1,27 +1,72 @@
 var data = [];
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+function getRandom(max) {
+  return Math.floor(Math.random() * max);
 }
 
+// var getJSON = function(url, callback) {
+//     var xhr = new XMLHttpRequest();
+//     xhr.open("get", url, true);
+//     xhr.responseType = "json";
+//     xhr.onload = function() {
+//       var status = xhr.status;
+//       if (status == 200) {
+//         callback(null, xhr.response);
+//       } else {
+//         callback(status);
+//       }
+//     };
+//     xhr.send();
+// };
 
-var randomOffset = getRandomInt(0, 10000);
+// getJSON("https://health.data.ny.gov/resource/s8d9-z734.json?$select=count(*)",
+//     function(err, data) {
+//   if (err != null) {
+//     alert("Something went wrong: " + err);
+//   } else {
+//     alert("Your query count: " + data[0].count);
+//   }
+// });
 
-// todo: use count
-// var count = 'https://health.data.ny.gov/resource/s8d9-z734.json?$select=count(*)';
-// [{"count":"2665414"}]
-// alert(count);
+// var getRecordsCount = function (url, callback){
+//     var count = 0;
+//     d3.json(url, function(err, countResponse){
+//         count = countResponse[0].count;
+//     });
+//     return count;
+// }
+
+var count2009, count2010, count2011, count2012, count2013, count2014;
+var randomOffset2009, randomOffset2010, randomOffset2011, randomOffset2012, randomOffset2013, randomOffset2014;
+
+d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$select=count(*)', function(err, counted2009){
+    count2009 = counted2009[0].count;
+    randomOffset2009 = getRandom(count2009);
+d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json?$select=count(*)', function(err, counted2010){
+    count2010 = counted2010[0].count;
+    randomOffset2010 = getRandom(count2010);
+d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json?$select=count(*)', function(err, counted2011){
+    count2011 = counted2011[0].count;
+    randomOffset2011 = getRandom(count2011);
+d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json?$select=count(*)', function(err, counted2012){
+    count2012 = counted2012[0].count;
+    randomOffset2012 = getRandom(count2012);
+d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json?$select=count(*)', function(err, counted2013){
+    count2013 = counted2013[0].count;
+    randomOffset2013 = getRandom(count2013);
+d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$select=count(*)', function(err, counted2014){
+    count2014 = counted2014[0].count;
+    randomOffset2014 = getRandom(count2014);
 
 // for offline testing purposes
 // d3.json('data.json', function(error, data){
 
-// d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$limit=1000&$offset=' + randomOffset, function(error, data2009){
-d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$limit=1000&$offset=' + randomOffset, function(error, data2009){
-d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json?$limit=1000&$offset=' + randomOffset, function(error, data2010){
-d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json?$limit=1000&$offset=' + randomOffset, function(error, data2011){
-d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json?$limit=1000&$offset=' + randomOffset, function(error, data2012){
-d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json?$limit=1000&$offset=' + randomOffset, function(error, data2013){
-d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000&$offset=' + randomOffset, function(error, data2014){
+d3.json('https://health.data.ny.gov/resource/s8d9-z734.json?$limit=1000&$offset=' + randomOffset2009, function(error, data2009){
+d3.json('https://health.data.ny.gov/resource/dpew-wqcg.json?$limit=1000&$offset=' + randomOffset2010, function(error, data2010){
+d3.json('https://health.data.ny.gov/resource/n5y9-zanf.json?$limit=1000&$offset=' + randomOffset2011, function(error, data2011){
+d3.json('https://health.data.ny.gov/resource/rv8x-4fm3.json?$limit=1000&$offset=' + randomOffset2012, function(error, data2012){
+d3.json('https://health.data.ny.gov/resource/tdf6-7fpk.json?$limit=1000&$offset=' + randomOffset2013, function(error, data2013){
+d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000&$offset=' + randomOffset2014, function(error, data2014){
 
     // concatenate all data into one 
     data = data.concat(data2009);
@@ -211,5 +256,7 @@ d3.json('https://health.data.ny.gov/resource/pzzw-8zdv.json?$limit=1000&$offset=
     }
 
 
-})})})})})
-});
+})})})})})})
+})})})})})})
+// })
+;
