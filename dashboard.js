@@ -9,8 +9,11 @@ const DATASETNAMES = {
     2013: 'tdf6-7fpk',
     2014: 'pzzw-8zdv'
 } 
-function getRandom(max) {
+function getRandomInt(max) {
     return Math.floor(Math.random() * max);
+}
+function getRandom(countRecord) {
+    return getRandomInt(countedRecord[0].count);
 }
 function getCountUrl(year){
     return `${API_URL}${DATASETNAMES[year]}.json?$select=count(*)`;
@@ -21,17 +24,17 @@ function getDataUrl(year){
 var randomOffsets = {};
 
 d3.json(getCountUrl(2009), function(err, counted2009){
-    randomOffsets[2009] = getRandom(counted2009[0].count);
+    randomOffsets[2009] = getRandom(counted2009);
 d3.json(getCountUrl(2010), function(err, counted2010){
-    randomOffsets[2010] = getRandom(counted2010[0].count);
+    randomOffsets[2010] = getRandom(counted2010);
 d3.json(getCountUrl(2011), function(err, counted2011){
-    randomOffsets[2011] = getRandom(counted2011[0].count);
+    randomOffsets[2011] = getRandom(counted2011);
 d3.json(getCountUrl(2012), function(err, counted2012){
-    randomOffsets[2012] = getRandom(counted2012[0].count);
+    randomOffsets[2012] = getRandom(counted2012);
 d3.json(getCountUrl(2013), function(err, counted2013){
-    randomOffsets[2013] = getRandom(counted2013[0].count);
+    randomOffsets[2013] = getRandom(counted2013);
 d3.json(getCountUrl(2014), function(err, counted2014){
-    randomOffsets[2014] = getRandom(counted2014[0].count);
+    randomOffsets[2014] = getRandom(counted2014);
 
 // for offline testing purposes
 // d3.json('data.json', function(error, data){
