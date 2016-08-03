@@ -114,10 +114,11 @@ d3.json(getDataUrl(2014), function(error, data2014){
     createPieChart('source_of_payment_2');
     createPieChart('source_of_payment_3');
     
+
     // length of stay
     var stayDim = ndx.dimension(dc.pluck('length_of_stay')); 
     var countPerStay = stayDim.group().reduceCount();
-    var stayChart = dc.barChart('#chart-stay-count');
+    var stayChart = dc.barChart('#length_of_stay');
     stayChart
         .width(300)
         .height(180)
@@ -131,7 +132,7 @@ d3.json(getDataUrl(2014), function(error, data2014){
         .yAxisLabel('Count')
         .margins({top: 10, right: 20, bottom: 50, left: 50});
     stayChart.xAxis().tickValues([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-    d3.selectAll('a#resetStay').on('click', function () {
+    d3.selectAll('a#reset_length_of_stay').on('click', function () {
         stayChart.filterAll();
         dc.redrawAll();
     });
@@ -139,7 +140,7 @@ d3.json(getDataUrl(2014), function(error, data2014){
     // years
     var yearDim = ndx.dimension(dc.pluck('year')); 
     var countPerYear = yearDim.group().reduceCount();
-    var yearChart = dc.barChart('#chart-year');
+    var yearChart = dc.barChart('#year');
     yearChart
         .width(300)
         .height(180)
@@ -153,7 +154,7 @@ d3.json(getDataUrl(2014), function(error, data2014){
         .yAxisLabel('Count')
         .margins({top: 10, right: 20, bottom: 50, left: 50});
     stayChart.xAxis().tickValues([2008, 2009, 2010, 2011, 2012, 2013, 2014]);
-    d3.selectAll('a#resetYear').on('click', function () {
+    d3.selectAll('a#reset_year').on('click', function () {
         yearChart.filterAll();
         dc.redrawAll();
     });
@@ -161,7 +162,7 @@ d3.json(getDataUrl(2014), function(error, data2014){
     // age groups
     var ageDim = ndx.dimension(dc.pluck('age_group_start')); 
     var countPerAge = ageDim.group().reduceCount();
-    var ageChart = dc.barChart('#chart-agegroup');
+    var ageChart = dc.barChart('#age_group_start');
     ageChart
         .width(300)
         .height(180)
@@ -175,7 +176,7 @@ d3.json(getDataUrl(2014), function(error, data2014){
         .yAxisLabel('Count')
         .margins({top: 10, right: 20, bottom: 50, left: 50});
     ageChart.xAxis().tickValues([0, 18, 30, 50, 70]);
-    d3.selectAll('a#resetAgeGroup').on('click', function () {
+    d3.selectAll('a#reset_age_group_start').on('click', function () {
         ageChart.filterAll();
         dc.redrawAll();
     });
@@ -183,7 +184,7 @@ d3.json(getDataUrl(2014), function(error, data2014){
     // day of week
     var dayDim = ndx.dimension(dc.pluck('admit_day_of_week')); 
     var countPerDay = dayDim.group().reduceCount();
-    var dayChart = dc.barChart('#chart-day');
+    var dayChart = dc.barChart('#admit_day_of_week');
     dayChart
         .width(300)
         .height(180)
@@ -198,7 +199,7 @@ d3.json(getDataUrl(2014), function(error, data2014){
         .yAxisLabel('Count')
         .margins({top: 10, right: 20, bottom: 50, left: 50});
     // dayChart.xAxis().tickValues(['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']);
-    d3.selectAll('a#resetDay').on('click', function () {
+    d3.selectAll('a#reset_admit_day_of_week').on('click', function () {
         dayChart.filterAll();
         dc.redrawAll();
     });
