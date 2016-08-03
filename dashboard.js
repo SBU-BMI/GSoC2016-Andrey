@@ -13,7 +13,7 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 function getRandom(countRecord) {
-    return getRandomInt(countedRecord[0].count);
+    return getRandomInt(countRecord[0].count);
 }
 function getCountUrl(year){
     return `${API_URL}${DATASETNAMES[year]}.json?$select=count(*)`;
