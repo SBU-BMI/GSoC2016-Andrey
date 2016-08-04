@@ -142,7 +142,6 @@ d3.json(getDataUrl(2014), function(error, data2014){
     createBarChart('length_of_stay', [0,11], 5, 'Length of stay, days', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
     createBarChart('year', [2008, 2015], 3, 'Year', [2009, 2010, 2011, 2012, 2013, 2014]);
     createBarChart('age_group_start', [-10, 80], 5, 'Age group', [0, 18, 30, 50, 70]);
-    createBarChart('admit_day_of_week', [-10, 80], 5, 'Age group', [0, 18, 30, 50, 70]);
 
     // day of week
     // todo: handle ordinal scale in createBar function
