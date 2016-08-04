@@ -115,7 +115,8 @@ d3.json(getDataUrl(2014), function(error, data2014){
     createPieChart('source_of_payment_3');
     
     var createBarChart = function(
-        fieldName, xDomain, barPadding, xLabel, xValues
+        fieldName, xDomain, barPadding, xLabel, xValues,
+        xScaleLinear = true
     ){
         var dimension = ndx.dimension(dc.pluck(fieldName)); 
         var counts = dimension.group().reduceCount();
@@ -125,14 +126,22 @@ d3.json(getDataUrl(2014), function(error, data2014){
             .height(180)
             .dimension(dimension)
             .group(counts)
-            .x(d3.scale.linear().domain(xDomain))
             .elasticY(true)
             .centerBar(true)
             .barPadding(barPadding)
             .xAxisLabel(xLabel)
             .yAxisLabel('Count')
             .margins({top: 10, right: 20, bottom: 50, left: 50});
-        chart.xAxis().tickValues(xValues);
+        
+        if (xScaleLinear){
+            chart.x(d3.scale.linear().domain(xDomain))
+            chart.xAxis().tickValues(xValues);
+        }
+        else{
+            chart.x(d3.scale.ordinal().domain(xDomain));
+            chart.xUnits(dc.units.ordinal); // Tell dc.js that we're using an ordinal x-axis
+        }
+
         d3.selectAll(`a#reset_${fieldName}`).on('click', function () {
             chart.filterAll();
             dc.redrawAll();
@@ -142,29 +151,7 @@ d3.json(getDataUrl(2014), function(error, data2014){
     createBarChart('length_of_stay', [0,11], 5, 'Length of stay, days', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
     createBarChart('year', [2008, 2015], 3, 'Year', [2009, 2010, 2011, 2012, 2013, 2014]);
     createBarChart('age_group_start', [-10, 80], 5, 'Age group', [0, 18, 30, 50, 70]);
-
-    // day of week
-    // todo: handle ordinal scale in createBar function
-    var dayDim = ndx.dimension(dc.pluck('admit_day_of_week')); 
-    var countPerDay = dayDim.group().reduceCount();
-    var dayChart = dc.barChart('#admit_day_of_week');
-    dayChart
-        .width(300)
-        .height(180)
-        .dimension(dayDim)
-        .group(countPerDay)
-        .x(d3.scale.ordinal().domain(['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']))
-        .xUnits(dc.units.ordinal) // Tell dc.js that we're using an ordinal x-axis
-        .elasticY(true)
-        .centerBar(true)
-        .barPadding(1)
-        .xAxisLabel('Day of week')
-        .yAxisLabel('Count')
-        .margins({top: 10, right: 20, bottom: 50, left: 50});
-    d3.selectAll('a#reset_admit_day_of_week').on('click', function () {
-        dayChart.filterAll();
-        dc.redrawAll();
-    });
+    createBarChart('admit_day_of_week', ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'], 1, 'Admission day of week', [0, 18, 30, 50, 70], false);
 
     // count widget (count all records and selected)
     var all = ndx.groupAll();
