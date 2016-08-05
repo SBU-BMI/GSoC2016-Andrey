@@ -1,14 +1,17 @@
 var data = [];
-const API_URL = 'https://health.data.ny.gov/resource/';
-const LIMIT = 10;
-const DATASETNAMES = {
-    2009: 's8d9-z734',
-    2010: 'dpew-wqcg',
-    2011: 'n5y9-zanf',
-    2012: 'rv8x-4fm3',
-    2013: 'tdf6-7fpk',
-    2014: 'pzzw-8zdv'
-} 
+if(typeof(API_URL)=='undefined'){const API_URL = 'https://health.data.ny.gov/resource/'};
+if(typeof(LIMIT)=='undefined'){const LIMIT = 10};
+if(typeof(DATASETNAMES)=='undefined'){
+    const DATASETNAMES = {
+        2009: 's8d9-z734',
+        2010: 'dpew-wqcg',
+        2011: 'n5y9-zanf',
+        2012: 'rv8x-4fm3',
+        2013: 'tdf6-7fpk',
+        2014: 'pzzw-8zdv'
+    } 
+};
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
