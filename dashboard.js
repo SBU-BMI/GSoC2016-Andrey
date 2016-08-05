@@ -1,15 +1,13 @@
 var data = [];
-if(typeof(API_URL)=='undefined'){const API_URL = 'https://health.data.ny.gov/resource/'};
-if(typeof(LIMIT)=='undefined'){const LIMIT = 10};
-if(typeof(DATASETNAMES)=='undefined'){
-    const DATASETNAMES = {
-        2009: 's8d9-z734',
-        2010: 'dpew-wqcg',
-        2011: 'n5y9-zanf',
-        2012: 'rv8x-4fm3',
-        2013: 'tdf6-7fpk',
-        2014: 'pzzw-8zdv'
-    } 
+var API_URL = 'https://health.data.ny.gov/resource/';
+var LIMIT = 10;
+var DATASETNAMES = {
+    2009: 's8d9-z734',
+    2010: 'dpew-wqcg',
+    2011: 'n5y9-zanf',
+    2012: 'rv8x-4fm3',
+    2013: 'tdf6-7fpk',
+    2014: 'pzzw-8zdv'
 };
 
 function getRandomInt(max) {
@@ -189,5 +187,5 @@ d3.json(getDataUrl(2014), function(error, data2014){
 
 })})})})})})
 })})})})})})
-// })
+//})
 ;
