@@ -13,9 +13,6 @@ var DATASETNAMES = {
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
-function getRandom(countRecord) {
-    return getRandomInt(countRecord[0].count);
-}
 function getCountUrl(year){
     return `${API_URL}${DATASETNAMES[year]}.json?$select=count(*)`;
 }
@@ -24,75 +21,23 @@ function getDataUrl(year){
 }
 var randomOffsets = {};
 
-
-function get(url) {
-  // Return a new promise.
-  return new Promise(function(resolve, reject) {
-    // Do the usual XHR stuff
-    var req = new XMLHttpRequest();
-    req.open('GET', url);
-
-    req.onload = function() {
-      // This is called even on 404 etc so check the status
-      if (req.status == 200) {
-        // Resolve the promise with the response text
-        resolve(req.response);
-      }
-      else {
-        // Otherwise reject with the status text which will hopefully be a meaningful error
-        reject(Error(req.statusText));
-      }
-    };
-
-    // Handle network errors
-    req.onerror = function() {
-      reject(Error("Network Error"));
-    };
-
-    // Make the request
-    req.send();
-  });
-}
-
-function getJSON (url) {
-    return get(url).then(JSON.parse);
-}
-
-// function getOffset(year){
-//     getJSON(getCountUrl(year)).then(function(response) {
-//         randomOffsets[year] = getRandomInt(response[0].count);
-//         // console.log(randomOffsets[year]);
-//     })
-// }
-
-// getOffset(2009);
-// getOffset(2010);
-
 function getOffset(year){
     return getJSON(getCountUrl(year)).then(function(response){
-        return response[0].count;
+        randomOffsets[year] = getRandomInt(response[0].count);
+        // debug
+        // console.log(randomOffsets[year]);
+        // for chaining
+        return true;
     });
 }
 
-getOffset(2009).then(function(response){
-    console.log(response);
-    return getOffset(2010);
-}).then(function(response){
-    console.log(response);
-});
-
-d3.json(getCountUrl(2009), function(err, counted2009){
-    randomOffsets[2009] = getRandom(counted2009);
-d3.json(getCountUrl(2010), function(err, counted2010){
-    randomOffsets[2010] = getRandom(counted2010);
-d3.json(getCountUrl(2011), function(err, counted2011){
-    randomOffsets[2011] = getRandom(counted2011);
-d3.json(getCountUrl(2012), function(err, counted2012){
-    randomOffsets[2012] = getRandom(counted2012);
-d3.json(getCountUrl(2013), function(err, counted2013){
-    randomOffsets[2013] = getRandom(counted2013);
-d3.json(getCountUrl(2014), function(err, counted2014){
-    randomOffsets[2014] = getRandom(counted2014);
+getOffset(2009)
+.then(getOffset(2010))
+.then(getOffset(2011))
+.then(getOffset(2012))
+.then(getOffset(2013))
+.then(getOffset(2014))
+.then(function(response){
 
 // for offline testing purposes
 // d3.json('data.json', function(error, data){
@@ -241,8 +186,6 @@ d3.json(getDataUrl(2014), function(error, data2014){
         console.log(counts.top(topCount));       
     }
 
-
-})})})})})})
 })})})})})})
 //})
-;
+});
