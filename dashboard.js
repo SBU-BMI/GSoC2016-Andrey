@@ -1,4 +1,5 @@
 var data = [];
+var randomOffsets = {};
 var API_URL = 'https://health.data.ny.gov/resource/';
 var LIMIT = 10;
 var DATASETNAMES = {
@@ -10,25 +11,11 @@ var DATASETNAMES = {
     2014: 'pzzw-8zdv'
 };
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-}
-function getBaseUrl(year){
-    return `${API_URL}${DATASETNAMES[year]}.json`;
-}
-function getCountUrl(year){
-    return `${getBaseUrl(year)}?$select=count(*)`;
-}
-function getDataUrl(year){
-    return `${getBaseUrl(year)}?$limit=${LIMIT}&$offset=${randomOffsets[year]}`;
-}
-var randomOffsets = {};
-
-function getOffset(year){
-    return getJSON(getCountUrl(year)).then(function(response){
-        randomOffsets[year] = getRandomInt(response[0].count);
-    });
-}
+var getRandomInt    = (max)  => Math.floor(Math.random() * max);
+var getBaseUrl      = (year) => `${API_URL}${DATASETNAMES[year]}.json`;
+var getCountUrl     = (year) => `${getBaseUrl(year)}?$select=count(*)`;
+var getDataUrl      = (year) => `${getBaseUrl(year)}?$limit=${LIMIT}&$offset=${randomOffsets[year]}`;
+var getOffset       = (year) => getJSON(getCountUrl(year)).then((response) => randomOffsets[year] = getRandomInt(response[0].count));
 
 getOffset(2009)
 .then(getOffset(2010))
