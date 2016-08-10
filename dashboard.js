@@ -13,11 +13,14 @@ var DATASETNAMES = {
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
+function getBaseUrl(year){
+    return `${API_URL}${DATASETNAMES[year]}.json`;
+}
 function getCountUrl(year){
-    return `${API_URL}${DATASETNAMES[year]}.json?$select=count(*)`;
+    return `${getBaseUrl(year)}?$select=count(*)`;
 }
 function getDataUrl(year){
-    return `${API_URL}${DATASETNAMES[year]}.json?$limit=${LIMIT}&$offset=${randomOffsets[year]}`;
+    return `${getBaseUrl(year)}?$limit=${LIMIT}&$offset=${randomOffsets[year]}`;
 }
 var randomOffsets = {};
 
