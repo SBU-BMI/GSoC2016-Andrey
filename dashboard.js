@@ -24,10 +24,6 @@ var randomOffsets = {};
 function getOffset(year){
     return getJSON(getCountUrl(year)).then(function(response){
         randomOffsets[year] = getRandomInt(response[0].count);
-        // debug
-        // console.log(randomOffsets[year]);
-        // for chaining
-        return true;
     });
 }
 
