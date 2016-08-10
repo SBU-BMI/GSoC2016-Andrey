@@ -58,9 +58,28 @@ function getJSON (url) {
     return get(url).then(JSON.parse);
 }
 
-getJSON(getCountUrl(2009)).then(function(response) {
-  console.log(response[0].count);
-})
+// function getOffset(year){
+//     getJSON(getCountUrl(year)).then(function(response) {
+//         randomOffsets[year] = getRandomInt(response[0].count);
+//         // console.log(randomOffsets[year]);
+//     })
+// }
+
+// getOffset(2009);
+// getOffset(2010);
+
+function getOffset(year){
+    return getJSON(getCountUrl(year)).then(function(response){
+        return response[0].count;
+    });
+}
+
+getOffset(2009).then(function(response){
+    console.log(response);
+    return getOffset(2010);
+}).then(function(response){
+    console.log(response);
+});
 
 d3.json(getCountUrl(2009), function(err, counted2009){
     randomOffsets[2009] = getRandom(counted2009);
