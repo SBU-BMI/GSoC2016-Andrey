@@ -1,5 +1,5 @@
 var data = [];
-var randomOffsets = {};
+var offsets = {};
 var API_URL = 'https://health.data.ny.gov/resource/';
 var LIMIT = 10;
 var DATASETNAMES = {
@@ -11,29 +11,29 @@ var DATASETNAMES = {
     2014: 'pzzw-8zdv'
 };
 
-var getRandomInt    = (max)  => Math.floor(Math.random() * max);
-var getBaseUrl      = (year) => `${API_URL}${DATASETNAMES[year]}.json`;
-var getCountUrl     = (year) => `${getBaseUrl(year)}?$select=count(*)`;
-var getDataUrl      = (year) => `${getBaseUrl(year)}?$limit=${LIMIT}&$offset=${randomOffsets[year]}`;
-var getOffset       = (year) => getJSON(getCountUrl(year)).then((response) => randomOffsets[year] = getRandomInt(response[0].count));
+var random      = (max)  => Math.floor(Math.random() * max);
+var baseUrl     = (year) => `${API_URL}${DATASETNAMES[year]}.json`;
+var countUrl    = (year) => `${baseUrl(year)}?$select=count(*)`;
+var dataUrl     = (year) => `${baseUrl(year)}?$limit=${LIMIT}&$offset=${offsets[year]}`;
+var setOffset   = (year) => getJSON(countUrl(year)).then((response) => offsets[year] = random(response[0].count));
 
-getOffset(2009)
-.then(getOffset(2010))
-.then(getOffset(2011))
-.then(getOffset(2012))
-.then(getOffset(2013))
-.then(getOffset(2014))
+setOffset(2009)
+.then(setOffset(2010))
+.then(setOffset(2011))
+.then(setOffset(2012))
+.then(setOffset(2013))
+.then(setOffset(2014))
 .then(function(response){
 
 // for offline testing purposes
 // d3.json('data.json', function(error, data){
 
-d3.json(getDataUrl(2009), function(error, data2009){
-d3.json(getDataUrl(2010), function(error, data2010){
-d3.json(getDataUrl(2011), function(error, data2011){
-d3.json(getDataUrl(2012), function(error, data2012){
-d3.json(getDataUrl(2013), function(error, data2013){
-d3.json(getDataUrl(2014), function(error, data2014){
+d3.json(dataUrl(2009), function(error, data2009){
+d3.json(dataUrl(2010), function(error, data2010){
+d3.json(dataUrl(2011), function(error, data2011){
+d3.json(dataUrl(2012), function(error, data2012){
+d3.json(dataUrl(2013), function(error, data2013){
+d3.json(dataUrl(2014), function(error, data2014){
 
     // concatenate all data into one 
     data = data.concat(data2009);
