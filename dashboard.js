@@ -11,10 +11,14 @@ var DATASETNAMES = {
     2014: 'pzzw-8zdv'
 };
 
+// todo: get county from dropdown
+var county = 'Suffolk';
+var rethink_ofset = 0;
+
 var random      = (max)  => Math.floor(Math.random() * max);
 var baseUrl     = (year) => `${API_URL}${DATASETNAMES[year]}.json`;
 var countUrl    = (year) => `${baseUrl(year)}?$select=count(*)`;
-var dataUrl     = (year) => `${baseUrl(year)}?$limit=${LIMIT}&$offset=${offsets[year]}`;
+var dataUrl     = (year) => `${baseUrl(year)}?$limit=${LIMIT}&$offset=${rethink_ofset}&hospital_county=${county}`;
 var setOffset   = (year) => getJSON(countUrl(year)).then((response) => offsets[year] = random(response[0].count));
 var concatData  = (year) => getJSON(dataUrl(year)).then((response) => data = data.concat(response));
 var getData     = (year) => setOffset(year).then((response) => concatData(year));
