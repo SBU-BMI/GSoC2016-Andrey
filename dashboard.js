@@ -16,32 +16,16 @@ var baseUrl     = (year) => `${API_URL}${DATASETNAMES[year]}.json`;
 var countUrl    = (year) => `${baseUrl(year)}?$select=count(*)`;
 var dataUrl     = (year) => `${baseUrl(year)}?$limit=${LIMIT}&$offset=${offsets[year]}`;
 var setOffset   = (year) => getJSON(countUrl(year)).then((response) => offsets[year] = random(response[0].count));
+var concatData  = (year) => getJSON(dataUrl(year)).then((response) => data = data.concat(response));
+var getData     = (year) => setOffset(year).then((response) => concatData(year));
 
-setOffset(2009)
-.then(setOffset(2010))
-.then(setOffset(2011))
-.then(setOffset(2012))
-.then(setOffset(2013))
-.then(setOffset(2014))
+getData(2009)
+.then(getData(2010))
+.then(getData(2011))
+.then(getData(2012))
+.then(getData(2013))
+.then(getData(2014))
 .then(function(response){
-
-// for offline testing purposes
-// d3.json('data.json', function(error, data){
-
-d3.json(dataUrl(2009), function(error, data2009){
-d3.json(dataUrl(2010), function(error, data2010){
-d3.json(dataUrl(2011), function(error, data2011){
-d3.json(dataUrl(2012), function(error, data2012){
-d3.json(dataUrl(2013), function(error, data2013){
-d3.json(dataUrl(2014), function(error, data2014){
-
-    // concatenate all data into one 
-    data = data.concat(data2009);
-    data = data.concat(data2010);
-    data = data.concat(data2011);
-    data = data.concat(data2012);
-    data = data.concat(data2013);
-    data = data.concat(data2014);
 
     // data cleanup 
     var yearFormat = d3.time.format('%Y');
@@ -171,7 +155,4 @@ d3.json(dataUrl(2014), function(error, data2014){
         
         console.log(counts.top(topCount));       
     }
-
-})})})})})})
-//})
 });
