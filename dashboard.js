@@ -19,6 +19,17 @@ var setOffset   = (year) => getJSON(countUrl(year)).then((response) => offsets[y
 var concatData  = (year) => getJSON(dataUrl(year)).then((response) => data = data.concat(response));
 var getData     = (year) => setOffset(year).then((response) => concatData(year));
 
+// loop through years, to avoid year hardcoding
+// var sequence = Promise.resolve();
+// sequence
+// .then(function(){
+//     return Object.keys(DATASETNAMES).reduce(function(year, index) {
+//         return sequence.then(function () {
+//             return getData(year);
+//         });
+//     }, Promise.resolve());
+// })
+
 getData(2009)
 .then(getData(2010))
 .then(getData(2011))
