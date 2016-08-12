@@ -26,7 +26,7 @@ var baseDataUrl = (year) => `${baseUrl(year)}?$limit=${LIMIT}`;
 
 //todo: test Random
 function dataUrl (year) { 
-    return (county && county != 'Random')
+    return (county() && county() != 'Random')
     ? `${baseDataUrl(year)}&hospital_county=${county()}`
     : `${baseDataUrl(year)}&$offset=${offsets[year]}`;
 }
