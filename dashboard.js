@@ -24,7 +24,6 @@ var concatData  = (year) => getJSON(dataUrl(year)).then((response) => data = dat
 var getData     = (year) => setOffset(year).then((response) => concatData(year));
 var baseDataUrl = (year) => `${baseUrl(year)}?$limit=${LIMIT}`;
 
-//todo: test Random
 function dataUrl (year) { 
     return (county() && county() != 'Random')
     ? `${baseDataUrl(year)}&hospital_county=${county()}`
