@@ -45,8 +45,12 @@
     <div class="row">
         <div class="col-xs-3">
             <h3>Please specify the county:<h3>
-            <small>Suffolk, or Allegany, etc - or Random for random mix of counties</small>
-            <input id="countyInput" type="text" value="Suffolk"></input>
+            <!--<input id="countyInput" type="text" value="Suffolk"></input>-->
+            <select id="countyInput">
+                <option value="Suffolk">Suffolk</option>
+                <option value="Allegany">Allegany</option>
+                <option value="Random">Random</option>
+            </select>
             <button class="btn btn-submit" onclick="load()">Load</button>
         </div>
         <div class="col-xs-3">
