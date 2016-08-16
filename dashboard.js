@@ -54,8 +54,8 @@ var load = () => {
             var dimension = ndx.dimension(function(d){return d[name] ? d[name] : "";});
             var counts = dimension.group().reduceCount();
             var chart = dc.pieChart(`#${name}`);
-            chart.width(150)
-                .height(150)
+            chart.width(200)
+                .height(200)
                 .dimension(dimension)
                 .group(counts)
                 .innerRadius(20);
@@ -104,7 +104,7 @@ var load = () => {
             var chart = dc.barChart(`#${fieldName}`);
             chart
                 .width(300)
-                .height(180)
+                .height(200)
                 .dimension(dimension)
                 .group(counts)
                 .elasticY(true)
