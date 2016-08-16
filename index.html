@@ -20,9 +20,9 @@
     <div class="row dc-data-count dc-chart" id="data-count">
         <h1>Google Summer of Code 2016 | Open Health: SPARCS data visualization</h1>
         <div>
-            <small>
+            </span><small>
                 <span class="filter-count"></span> selected out of <span class="total-count"></span> records |
-                <a id="resetAll" href="#">Reset all</a>
+                <a id="resetAll" href="#"> reset all</a>
             </small>
         </div>
         <div>    
@@ -43,10 +43,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-3">
-            <h3>Please specify the county:<h3>
+        <div class="col-md-4 panel panel-primary">
+            <h3 class="panel-heading">Please specify the county:<h3>
             <!--<input id="countyInput" type="text" value="Suffolk"></input>-->
-            <select id="countyInput">
+            <select class="panel-body" id="countyInput">
                 <option value="Random">Random counties</option>
                 <option value="Albany">Albany</option>
                 <option value="Allegany">Allegany</option>
@@ -106,109 +106,110 @@
                 <option value="Westchester">Westchester</option>
                 <option value="Wyoming">Wyoming</option>
                 <option value="Yates">Yates</option>
-            </select>
-            <button class="btn btn-submit" onclick="load()">Load</button>
+            </select><br>
+            <br>
+            <button class="btn btn-success btn-lg btn-block" onclick="load()">Load</button>
         </div>
-        <div class="col-xs-3">
-            <h4>County<small> | <a id="reset_hospital_county">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">County</span></span><small><a id="reset_hospital_county"> reset</a></small></h3>
             <div class="dc-chart" id="hospital_county"></div>
         </div>
-        <div class="col-xs-3">
-            <h4>Facility<small> | <a id="reset_facility_name">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Facility</span><small><a id="reset_facility_name"> reset</a></small></h3>
             <div class="dc-chart" id="facility_name"></div>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-3">
-            <h4>Gender<small> | <a id="reset_gender">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Gender</span><small><a id="reset_gender"> reset</a></small></h3>
             <div class="dc-chart" id="gender"></div>
         </div>
-        <div class="col-xs-3">
-            <h4>Race<small> | <a id="reset_race">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Race</span><small><a id="reset_race"> reset</a></small></h3>
             <div class="dc-chart" id="race"></div>
         </div>
-        <div class="col-xs-3">
-            <h4>Ethnicity<small> | <a id="reset_ethnicity">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Ethnicity</span><small><a id="reset_ethnicity"> reset</a></small></h3>
             <div class="dc-chart" id="ethnicity"></div>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-3">
-            <h4>Year<small> | <a id="reset_year">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Year</span><small><a id="reset_year"> reset</a></small></h3>
             <div class="dc-chart" id="year"></div>
         </div>
-       <div class="col-xs-3">
-            <h4>Weekday<small> | <a id="reset_admit_day_of_week">reset</a></small></h4>
+       <div class="col-md-4">
+            <h3><span class="label label-info">Weekday</span><small><a id="reset_admit_day_of_week"> reset</a></small></h3>
             <div class="dc-chart" id="admit_day_of_week"></div>
         </div>
-        <div class="col-xs-3">
-            <h4>Age group<small> | <a id="reset_age_group_start">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Age group</span><small><a id="reset_age_group_start"> reset</a></small></h3>
             <div class="dc-chart" id="age_group_start"></div>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-3">
-            <h4>Type of admission<small> | <a id="reset_type_of_admission">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Type of admission</span><small><a id="reset_type_of_admission"> reset</a></small></h3>
             <div class="dc-chart" id="type_of_admission"></div>
         </div>
-        <div class="col-xs-3">
-            <h4>Emergency<small> | <a id="reset_emergency_department_indicator">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Emergency</span><small><a id="reset_emergency_department_indicator"> reset</a></small></h3>
             <div class="dc-chart" id="emergency_department_indicator"></div>
         </div>
-        <div class="col-xs-3">
-            <h4>Severity of illness<small> | <a id="reset_apr_severity_of_illness_description">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Severity of illness</span><small><a id="reset_apr_severity_of_illness_description"> reset</a></small></h3>
             <div class="dc-chart" id="apr_severity_of_illness_description"></div>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-3">
-            <h4>Risk of mortality<small> | <a id="reset_apr_risk_of_mortality">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Risk of mortality</span><small><a id="reset_apr_risk_of_mortality"> reset</a></small></h3>
             <div class="dc-chart" id="apr_risk_of_mortality"></div>
         </div>
-        <div class="col-xs-3">
-            <h4>Medical or surgical<small> | <a id="reset_apr_medical_surgical_description">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Medical or surgical</span><small><a id="reset_apr_medical_surgical_description"> reset</a></small></h3>
             <div class="dc-chart" id="apr_medical_surgical_description"></div>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-3">
-            <h4>Diagnosis category (MDC)<small> | <a id="reset_apr_mdc_description">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Diagnosis category (MDC)</span><small><a id="reset_apr_mdc_description"> reset</a></small></h3>
             <div class="dc-chart" id="apr_mdc_description"></div>
         </div>
-        <div class="col-xs-3">
-            <h4>Diagnosis group (DRG)<small> | <a id="reset_apr_drg_description">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Diagnosis group (DRG)</span><small><a id="reset_apr_drg_description"> reset</a></small></h3>
             <div class="dc-chart" id="apr_drg_description"></div>
         </div>
-        <div class="col-xs-3">
-            <h4>Diagnosis<small> | <a id="reset_ccs_diagnosis_description">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Diagnosis</span><small><a id="reset_ccs_diagnosis_description"> reset</a></small></h3>
             <div class="dc-chart" id="ccs_diagnosis_description"></div>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-3">
-            <h4>Procedure<small> | <a id="reset_ccs_procedure_description">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Procedure</span><small><a id="reset_ccs_procedure_description"> reset</a></small></h3>
             <div class="dc-chart" id="ccs_procedure_description"></div>
         </div>
-        <div class="col-xs-3">
-            <h4>Length of stay<small> | <a id="reset_length_of_stay">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Length of stay</span><small><a id="reset_length_of_stay"> reset</a></small></h3>
             <div class="dc-chart" id="length_of_stay"></div>
         </div>
-        <div class="col-xs-3">
-            <h4>Disposition<small> | <a id="reset_patient_disposition">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Disposition</span><small><a id="reset_patient_disposition"> reset</a></small></h3>
             <div class="dc-chart" id="patient_disposition"></div>
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-3">
-            <h4>First source of payment<small> | <a id="reset_source_of_payment_1">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">First source of payment</span><small><a id="reset_source_of_payment_1"> reset</a></small></h3>
             <div class="dc-chart" id="source_of_payment_1"></div>
         </div>
-        <div class="col-xs-3">
-            <h4>Second source of payment<small> | <a id="reset_source_of_payment_2">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Second source of payment</span><small><a id="reset_source_of_payment_2"> reset</a></small></h3>
             <div class="dc-chart" id="source_of_payment_2"></div>
         </div>
-        <div class="col-xs-3">
-            <h4>Third source of first payment<small> | <a id="reset_source_of_payment_3">reset</a></small></h4>
+        <div class="col-md-4">
+            <h3><span class="label label-info">Third source of first payment</span><small><a id="reset_source_of_payment_3"> reset</a></small></h3>
             <div class="dc-chart" id="source_of_payment_3"></div>
         </div>
     </div>
