@@ -34,3 +34,8 @@ a { cursor: pointer }
     text-anchor: end !important;
     transform: rotate(-90deg);
 }
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+}
