@@ -10,10 +10,13 @@ var DATASETNAMES = {
     2013: 'tdf6-7fpk',
     2014: 'pzzw-8zdv'
 };
-//test
-//todo: to dropdown
-function county (){
-    return document.getElementById('countyInput').value;
+
+function countySelector() {
+    return document.getElementById('countyInput')
+}
+
+function county() {
+    return countySelector().value;
 }
 
 var random      = (max)  => Math.floor(Math.random() * max);
@@ -24,7 +27,29 @@ var concatData  = (year) => getJSON(dataUrl(year)).then((response) => data = dat
 var getData     = (year) => setOffset(year).then((response) => concatData(year));
 var baseDataUrl = (year) => `${baseUrl(year)}?$limit=${LIMIT}`;
 
-function dataUrl (year) { 
+function toKeyValue( prmstr ) {
+    var params = {};
+    var prmarr = prmstr.split("&");
+    for ( var i = 0; i < prmarr.length; i++) {
+        var tmparr = prmarr[i].split("=");
+        params[tmparr[0]] = tmparr[1];
+    }
+    return params;
+}
+
+function getSearchParams() {
+    var prmstr = window.location.search.substr(1);
+    return prmstr != null && prmstr != "" ? toKeyValue(prmstr) : {};
+}
+
+function setCountyFromParams() {
+    var params = getSearchParams();
+    if (params.county){
+        countySelector().value = params.county;
+    }
+}
+
+function dataUrl (year) {     
     return (county() && county() != 'Random')
     ? `${baseDataUrl(year)}&hospital_county=${county()}`
     : `${baseDataUrl(year)}&$offset=${offsets[year]}`;
