@@ -1,4 +1,6 @@
 # GSoC2016-Andrey
 Google Summer of Code for Andrey
 
-Live at https://sbu-bmi.github.io/GSoC2016-Andrey
+Sourcecode: https://github.com/SBU-BMI/GSoC2016-Andrey
+Live app: https://sbu-bmi.github.io/GSoC2016-Andrey
+Report: https://goo.gl/iXxzJ4
