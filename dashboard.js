@@ -1,7 +1,6 @@
 var data = [];
 var offsets = {};
 var API_URL = 'https://health.data.ny.gov/resource/';
-var LIMIT = 10;
 var DATASETNAMES = {
     2009: 's8d9-z734',
     2010: 'dpew-wqcg',
@@ -12,7 +11,11 @@ var DATASETNAMES = {
 };
 
 function countySelector() {
-    return document.getElementById('countyInput')
+    return document.getElementById('countyInput');
+}
+
+function sampleSize() {
+    return document.getElementById('sizeInput').value;
 }
 
 function county() {
@@ -25,7 +28,7 @@ var countUrl    = (year) => `${baseUrl(year)}?$select=count(*)`;
 var setOffset   = (year) => getJSON(countUrl(year)).then((response) => offsets[year] = random(response[0].count));
 var concatData  = (year) => getJSON(dataUrl(year)).then((response) => data = data.concat(response));
 var getData     = (year) => setOffset(year).then((response) => concatData(year));
-var baseDataUrl = (year) => `${baseUrl(year)}?$limit=${LIMIT}`;
+var baseDataUrl = (year) => `${baseUrl(year)}?$limit=${sampleSize()}`;
 
 function toKeyValue( prmstr ) {
     var params = {};
