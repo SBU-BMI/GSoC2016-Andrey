@@ -37,6 +37,8 @@ Main technologies used are:
 User selects county and limit (amount of records to load from each year) in appropriate dropdowns, 
 and presses "Load" button, then download requests are being sent to health.data.ny.gov server.
 After successfull download, data are represented in charts.
+One can choose 'Random' as county to download random sample, not specific to any county.
+
 ##### Parameter input from URL
 Desired county can be enetered not only from UI, in dropdown,
 but also in URL - appending app address with ````"?county=<YOUR_COUNTY>"```` parameter,
