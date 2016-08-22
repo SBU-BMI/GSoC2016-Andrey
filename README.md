@@ -46,14 +46,16 @@ for instance,
 https://sbu-bmi.github.io/GSoC2016-Andrey/?county=Suffolk
 ```
 
+Then data for just Sufolk county will be downloaded.
+Selection in dropdown will be upated as well to show "Suffolk".
 Same is for sample size. Example of request of 1000 records sample:
 
 ```
 https://sbu-bmi.github.io/GSoC2016-Andrey/?county=Suffolk&size=1000
 ```
 
-Then data for just Sufolk county will be downloaded.
-Selection in dropdown will be upated as well to show "Suffolk".
+In total, 6000 records (1000 for each year in 2009-2014) for Suffolk will be downloaded and visualized.
+
 ##### Interactive and synchronised filtering
 Charts are interactive - user can filter out required subset by just selecting any bar in barchart, or sector in pie-chart;
 in barcharts range can be selected. After enabling filter in one chart (selecting something in one chart), 
