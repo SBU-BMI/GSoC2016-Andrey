@@ -30,3 +30,18 @@ function get(url) {
 function getJSON (url) {
     return get(url).then(JSON.parse);
 }
+
+function toKeyValue( prmstr ) {
+    var params = {};
+    var prmarr = prmstr.split("&");
+    for ( var i = 0; i < prmarr.length; i++) {
+        var tmparr = prmarr[i].split("=");
+        params[tmparr[0]] = tmparr[1];
+    }
+    return params;
+}
+
+function getSearchParams() {
+    var prmstr = window.location.search.substr(1);
+    return prmstr != null && prmstr != "" ? toKeyValue(prmstr) : {};
+}

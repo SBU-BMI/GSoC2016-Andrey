@@ -14,8 +14,12 @@ function countySelector() {
     return document.getElementById('countyInput');
 }
 
+function sampleSizeSelector() {
+    return document.getElementById('sizeInput');
+}
+
 function sampleSize() {
-    return document.getElementById('sizeInput').value;
+    return sampleSizeSelector().value;
 }
 
 function county() {
@@ -30,21 +34,13 @@ var concatData  = (year) => getJSON(dataUrl(year)).then((response) => data = dat
 var getData     = (year) => setOffset(year).then((response) => concatData(year));
 var baseDataUrl = (year) => `${baseUrl(year)}?$limit=${sampleSize()}`;
 
-function toKeyValue( prmstr ) {
-    var params = {};
-    var prmarr = prmstr.split("&");
-    for ( var i = 0; i < prmarr.length; i++) {
-        var tmparr = prmarr[i].split("=");
-        params[tmparr[0]] = tmparr[1];
+
+function setSizeLimitFromParams() {
+    var params = getSearchParams();
+    if (params.size){
+        sampleSizeSelector().value = params.size;
     }
-    return params;
 }
-
-function getSearchParams() {
-    var prmstr = window.location.search.substr(1);
-    return prmstr != null && prmstr != "" ? toKeyValue(prmstr) : {};
-}
-
 function setCountyFromParams() {
     var params = getSearchParams();
     if (params.county){
