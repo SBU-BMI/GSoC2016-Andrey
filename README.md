@@ -46,6 +46,12 @@ for instance,
 https://sbu-bmi.github.io/GSoC2016-Andrey/?county=Suffolk
 ```
 
+Same is for sample size. Example of request of 1000 records sample:
+
+```
+https://sbu-bmi.github.io/GSoC2016-Andrey/?county=Suffolk&size=1000
+```
+
 Then data for just Sufolk county will be downloaded.
 Selection in dropdown will be upated as well to show "Suffolk".
 ##### Interactive and synchronised filtering
