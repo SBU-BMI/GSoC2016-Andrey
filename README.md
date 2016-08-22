@@ -8,7 +8,9 @@ Report: https://goo.gl/iXxzJ4
 
 ### Goal
 This app is interactive visualisation of SPARCS data.
+
 > SPARCS is short for Statewide Planning and Research Cooperative System, a system collecting patient level data from hospitals. 
+
 Visualization presents inpatient deidentified dataset of discharge level detail on patient characteristics, diagnoses, treatments, services and charges. Does not contain protected health information. Data sources: 2009, 2010, 2011, 2012, 2013, 2014. Currently presented data sources contains contains sample data. Actual datasets contain more than million records for each year, and are subject for further development. 
 
 ### Technologies
@@ -29,7 +31,9 @@ Desired county can be enetered not only from UI, in dropdown,
 but also in URL - appending app address with ````"?county=<YOUR_COUNTY>"```` parameter,
 for instance, 
 
-````https://sbu-bmi.github.io/GSoC2016-Andrey/?county=Suffolk````
+```
+https://sbu-bmi.github.io/GSoC2016-Andrey/?county=Suffolk
+```
 
 Then data for just Sufolk county will be downloaded.
 Selection in dropdown will be upated as well to show "Suffolk".
